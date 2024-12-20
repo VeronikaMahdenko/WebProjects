@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ excursion.title }}{% endblock %}
+
+{% block content %}
+<h2>{{ excursion.title }}</h2>
+<p>{{ excursion.description }}</p>
+<a href="/">Назад до головної</a>
+{% endblock %}

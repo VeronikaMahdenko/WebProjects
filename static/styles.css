@@ -1,0 +1,63 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: changeBackground 28s infinite; /* Плавна зміна фону */
+}
+
+header {
+    background: linear-gradient(to bottom, #4CAF50, #A5D6A7);
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    flex: 1; /* Займає все доступне місце між header і footer */
+    padding: 20px;
+}
+
+footer {
+    background: linear-gradient(to top, #4CAF50, #A5D6A7);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Анімація зміни фону */
+@keyframes changeBackground {
+    0% {
+        background-image: url('/static/image1.jpg');
+    }
+    25% {
+        background-image: url('/static/image2.jpg');
+    }
+    50% {
+        background-image: url('/static/image3.jpg');
+    }
+    75% {
+        background-image: url('/static/image4.jpg');
+    }
+    100% {
+        background-image: url('/static/image1.jpg');
+    }
+}
