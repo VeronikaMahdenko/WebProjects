@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\nikam\\Desktop\\3\u043A\u0443\u0440\u0441\\WebProjects\\asp.net-project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9395C63E-E0E3-4EA6-AF00-D9F2F66983AA}|Web-site2\\Web-site2.csproj|c:\\users\\nikam\\desktop\\3\u043A\u0443\u0440\u0441\\webprojects\\asp.net-project\\web-site2\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9395C63E-E0E3-4EA6-AF00-D9F2F66983AA}|Web-site2\\Web-site2.csproj|solutionrelative:web-site2\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9395C63E-E0E3-4EA6-AF00-D9F2F66983AA}|Web-site2\\Web-site2.csproj|c:\\users\\nikam\\desktop\\3\u043A\u0443\u0440\u0441\\webprojects\\asp.net-project\\web-site2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9395C63E-E0E3-4EA6-AF00-D9F2F66983AA}|Web-site2\\Web-site2.csproj|solutionrelative:web-site2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\nikam\\Desktop\\3\u043A\u0443\u0440\u0441\\WebProjects\\asp.net-project\\Web-site2\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Web-site2\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\nikam\\Desktop\\3\u043A\u0443\u0440\u0441\\WebProjects\\asp.net-project\\Web-site2\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Web-site2\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-20T17:35:19.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\nikam\\Desktop\\3\u043A\u0443\u0440\u0441\\WebProjects\\asp.net-project\\Web-site2\\Program.cs",
+              "RelativeDocumentMoniker": "Web-site2\\Program.cs",
+              "ToolTip": "C:\\Users\\nikam\\Desktop\\3\u043A\u0443\u0440\u0441\\WebProjects\\asp.net-project\\Web-site2\\Program.cs",
+              "RelativeToolTip": "Web-site2\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T17:33:42.989Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

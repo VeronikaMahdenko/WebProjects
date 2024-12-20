@@ -1,0 +1,137 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін Панель</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <section id="admin">
+        <h2>Адміністратор</h2>
+        <form id="adminLoginForm">
+            <input type="text" name="username" placeholder="Ім'я користувача" required />
+            <input type="password" name="password" placeholder="Пароль" required />
+            <button type="submit">Увійти</button>
+        </form>
+
+        <div id="adminPanel" style="display: none;">
+            <h3>Усі записи</h3>
+            <ul id="appointmentsList">
+                Тут буде список записів
+            </ul>
+        </div>
+
+        <div id="usersPanel" style="display: none;">
+            <h3>Усі користувачі</h3>
+            <ul id="usersList">
+                Тут буде список користувачів
+            </ul>
+        </div>
+
+    </section>
+
+    <script>
+        document.getElementById('adminLoginForm').onsubmit = async function (event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/bookings/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorResponse = await response.json();
+                    throw new Error(errorResponse.message || 'Network response was not ok');
+                }
+
+                alert('Успішний вхід');
+                document.getElementById('adminPanel').style.display = 'block';
+                loadAppointments();
+                loadUsers();
+                document.getElementById('usersPanel').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Помилка при вході адміністратора.');
+            }
+        };
+
+
+        async function loadAppointments() {
+            try {
+                const response = await fetch('/api/bookings/admin/appointments');
+                const appointments = await response.json();
+
+                const appointmentsList = document.getElementById('appointmentsList');
+                appointmentsList.innerHTML = '';
+
+                appointments.forEach(appointment => {
+                    const li = document.createElement('li');
+                    li.textContent = `${appointment.service} - ${appointment.appointmentTime} (Користувач: ${appointment.customerName})`;
+                    appointmentsList.appendChild(li);
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Видалити';
+                    deleteButton.onclick = function () {
+                        deleteAppointment(appointment.appointmentId);
+                    };
+                    li.appendChild(deleteButton);
+
+                    appointmentsList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+            }
+        }
+        async function deleteAppointment(appointmentId) {
+            try {
+                const response = await fetch(`/api/bookings/admin/appointments/${appointmentId}`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) {
+                    const errorResponse = await response.json();
+                    throw new Error(errorResponse.message || 'Network response was not ok');
+                }
+
+                alert('Запис успішно видалено!');
+                loadAppointments();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Помилка при видаленні запису.');
+            }
+        }
+
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/bookings/admin/users');
+                const users = await response.json();
+
+                const usersList = document.getElementById('usersList');
+                usersList.innerHTML = '';
+
+                if (users.length === 0) {
+                    usersList.innerHTML = '<li>Користувачів немає</li>';
+                }
+
+                users.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `${user.name} - ${user.phone}`;
+                    usersList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching users:', error);
+                alert('Помилка при завантаженні користувачів.');
+            }
+        }
+    </script>
+</body>
+</html>
+

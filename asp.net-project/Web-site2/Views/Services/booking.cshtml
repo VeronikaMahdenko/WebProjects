@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація та Бронювання</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <section id="register">
+        <h2>Реєстрація клієнта</h2>
+        <form id="registerForm">
+            <input type="text" name="name" placeholder="Ім'я" required />
+            <input type="text" name="phone" placeholder="Телефон" required />
+            <button type="submit">Зареєструватися</button>
+        </form>
+    </section>
+    <section id="booking">
+        <h2>Запис на послугу</h2>
+        <form id="bookingForm">
+            <input type="text" name="name" placeholder="Ваше ім'я" required />
+            <input type="text" name="phone" placeholder="Ваш телефон" required />
+
+            <label for="serviceCategory">Виберіть категорію послуги:</label>
+            <select id="serviceCategory" name="serviceCategory" required>
+                <option value="">Оберіть категорію</option>
+                <option value="Манікюр та педикюр">Манікюр та педикюр</option>
+                <option value="Послуги бровиста">Послуги бровиста</option>
+                <option value="Послуги масажиста">Послуги масажиста</option>
+            </select>
+
+            <label for="service">Виберіть послугу:</label>
+            <select id="service" name="service" required>
+            </select>
+
+            <label for="appointmentDate">Виберіть дату:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required />
+
+            <label for="appointmentTime">Виберіть час:</label>
+            <select id="appointmentTime" name="appointmentTime" required>
+                <option value="">Оберіть час</option>
+                <option value="08:00">08:00</option>
+                <option value="09:30">09:30</option>
+                <option value="11:00">11:00</option>
+                <option value="12:30">12:30</option>
+                <option value="14:00">14:00</option>
+                <option value="15:30">15:30</option>
+                <option value="17:00">17:00</option>
+                <option value="18:30">18:30</option>
+            </select>
+
+            <button type="submit">Записатися</button>
+        </form>
+    </section>
+
+    <script>
+
+        document.getElementById('registerForm').onsubmit = async function (event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/bookings/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorResponse = await response.json();
+                    throw new Error(errorResponse.message || 'Network response was not ok');
+                }
+
+                alert(`Користувача зареєстровано.`);
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Помилка: ${error.message}`);
+            }
+        };
+
+
+        const services = {
+            manicure: ["Класичний манікюр", "Класичний педикюр", "Нарощування нігтів", "SPA манікюр", "SPA педикюр", "Художній розпис нігтів"],
+            brows: ["Татуаж брів", "Корекція брів", "Фарбування брів", "Фарбування вій", "Ламінування брів", "Ламінування вій"],
+            massage: ["Лікувальний масаж", "Косметичний масаж", "Відновлювальний масаж", "Антицелюлітний масаж", "Лімфодренажний масаж"]
+        };
+
+        document.getElementById('serviceCategory').addEventListener('change', function () {
+            const selectedCategory = this.value;
+            const serviceSelect = document.getElementById('service');
+            serviceSelect.innerHTML = '<option value="">Оберіть послугу</option>';
+
+            if (selectedCategory) {
+                fetch(`/api/bookings/services?category=${encodeURIComponent(selectedCategory)}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        data.forEach(service => {
+                            const option = document.createElement('option');
+                            option.value = service.name;
+                            option.textContent = service.name;
+                            serviceSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching services:', error));
+            }
+        });
+
+        document.getElementById('bookingForm').onsubmit = async function (event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+            const appointmentDateTime = `${appointmentDate}T${appointmentTime}:00`;
+
+            try {
+                const response = await fetch('/api/bookings/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ...Object.fromEntries(formData.entries()),
+                        appointmentTime: appointmentDateTime
+                    })
+                });
+
+                const result = await response.json();
+                alert(result.message || 'Бронювання створено');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Виникла помилка при створенні бронювання.');
+            }
+        };
+    </script>
+</body>
+</html>
+

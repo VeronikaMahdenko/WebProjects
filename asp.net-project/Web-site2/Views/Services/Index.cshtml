@@ -1,0 +1,261 @@
+﻿@model IEnumerable<Web_site2.Models.Service>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Салон краси</title>
+    <link rel="stylesheet" href="css\site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <section class="hero">
+        <div class="photo photo1">
+            <div class="overlay">
+                <h1 class="logo">Verona</h1>
+                <div class="menu">
+                    <a href="#about">Про нас</a>
+                    <a href="#catalog">Каталог</a>
+                    <a href="#benefits">Нагороди</a>
+                    <a href="#trust">Переваги</a>
+                </div>
+                <p class="intro-text">Зробимо вигляд, наче ви щойно з відпустки!</p>
+            </div>
+        </div>
+
+        <div class="photo photo2">
+            <div class="overlay">
+                <div class="contact-info">
+                    <p>
+                        <i class="fa fa-phone"></i> (+380)66-825-93-22
+                        &nbsp; | &nbsp;
+                        <i class="fa fa-envelope"></i> info@verona-salon.com
+                    </p>
+                </div>
+
+                <p>Ласкаво просимо до нашого салону</p>
+                <div class="buttons">
+                    <a href="#services" class="btn">Наші послуги</a>
+                    <a href="#contact" class="btn">Контакти</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section id="about">
+        <h2 class="about-title">Про нас</h2>
+        <p class="about-description">
+            Салон краси <strong>"Verona"</strong> – це місце, де професіоналізм зустрічається з творчістю.
+            Наші майстри допоможуть вам підкреслити вашу природну красу, пропонуючи широкий спектр послуг
+            з догляду за тілом, обличчям та руками. Ознайомтесь з нашими спеціалістами!
+        </p>
+
+        <div class="specialists">
+            <div class="specialist">
+                <img src="../Images/eyebrows_expert.jpg" alt="Майстер з брів" class="specialist-photo" />
+                <h3>Майстер для брів та вій (Валерія)</h3>
+            </div>
+
+            <div class="specialist">
+                <img src="../Images/nail_expert.jpg" alt="Майстер з манікюру" class="specialist-photo" />
+                <h3>Майстер з манікюру (Вікторія)</h3>
+            </div>
+
+            <div class="specialist">
+                <img src="../Images/massage_expert.jpg" alt="Майстер з масажу" class="specialist-photo" />
+                <h3>Майстер з масажу (Віолетта)</h3>
+            </div>
+        </div>
+
+        <div class="scroll-to-top">
+            <a href="#" onclick="scrollToTop(); return false;">
+                &#8593;
+            </a>
+        </div>
+
+    </section>
+
+    <section id="services" class="services-section">
+        <h2>Наші Послуги</h2>
+
+        <ul class="services-list">
+            @foreach (var service in Model)
+            {
+                <li class="service-item">
+                    <h3>@service.Name</h3>
+                    <div class="service-image-wrapper">
+                        <img src="@Url.Content("~/" + service.ImageUrl)" alt="@service.Name" class="service-image" />
+                    </div>
+                    <p>@service.Description</p>
+                </li>
+            }
+        </ul>
+
+        <div class="scroll-to-top">
+            <a href="#" onclick="scrollToTop(); return false;">
+                &#8593;
+            </a>
+        </div>
+    </section>
+
+    <section id="benefits" class="awards-section">
+        <h2>Нагороди</h2>
+        <div class="awards-content">
+            <div class="award-item">
+                <img src="../Images/beauty.jpg" alt="Нагорода 1">
+            </div>
+
+            <div class="award-text">
+                <h3>Дальше більше!!</h3>
+            </div>
+
+            <div class="award-item">
+                <img src="../Images/simple-award-certificate-beauty-business_86683-82.jpg" alt="Нагорода 2">
+            </div>
+        </div>
+
+        <div class="scroll-to-top">
+            <a href="#" onclick="scrollToTop(); return false;">
+                &#8593;
+            </a>
+        </div>
+    </section>
+
+
+    <section id="trust" class="trust-section">
+        <h2>Переваги</h2>
+
+        <div class="trust-content">
+            <div class="trust-item">
+                <h3>Найкращі спеціалісти</h3>
+                <p>У нашій команді працюють професіонали з великим досвідом, які постійно підвищують свою кваліфікацію.</p>
+            </div>
+
+            <div class="trust-image">
+                <img src="../Images/plus.jpg" alt="Фото довіри" class="trust-photo">
+            </div>
+
+            <div class="trust-item">
+                <h3>Новітнє обладнання</h3>
+                <p>Ми використовуємо сучасні технології та обладнання, щоб гарантувати найкращі результати для вас.</p>
+            </div>
+        </div>
+
+        <div class="trust-content">
+            <div class="trust-item">
+                <h3>Безкінечний саморозвиток</h3>
+                <p>Наші спеціалісти постійно вдосконалюються, відвідують навчальні заходи та курси для того, щоб пропонувати вам найкращі послуги.</p>
+            </div>
+        </div>
+
+        <div class="scroll-to-top">
+            <a href="#" onclick="scrollToTop(); return false;">
+                &#8593;
+            </a>
+        </div>
+    </section>
+
+
+</section>
+
+    <section id="catalog" class="catalog-section">
+        <h2>Каталог послуг</h2>
+
+        <div class="category">
+            <h3>Наш салон пропонує Вам послуги манікюру і педикюру:</h3>
+            <ul style="list-style-type: none; padding: 0;">
+                <li>Класичний манікюр та педикюр - 350 грн</li>
+                <li>Нарощування нігтів - 50 грн/ніготь</li>
+                <li>SPA манікюр - 480 грн</li>
+                <li>SPA педикюр - 480 грн</li>
+                <li>Художній розпис нігтів - 80 грн/ніготь</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>Послуги масажиста:</h3>
+            <ul style="list-style-type: none; padding: 0;">
+                <li>Лікувальний масаж - 700 грн</li>
+                <li>Косметичний масаж - 520 грн</li>
+                <li>Відновлювальний масаж - 580 грн</li>
+                <li>Антицелюлітний масаж - 800 грн</li>
+                <li>Лімфодренажний масаж - 800 грн</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>Послуги бровиста:</h3>
+            <ul style="list-style-type: none; padding: 0;">
+                <li>Татуаж брів - 1500 грн</li>
+                <li>Корекція брів - 200 грн</li>
+                <li>Фарбування брів - 200 грн</li>
+                <li>Фарбування вій - 150 грн</li>
+                <li>Ламінування брів - 400 грн</li>
+                <li>Ламінування вій - 350 грн</li>
+            </ul>
+        </div>
+
+        <div class="scroll-to-top">
+            <a href="#" onclick="scrollToTop(); return false;">
+                &#8593; 
+            </a>
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <h2>Контакти</h2>
+        <p>Львів, вул. Медова Печера, 39B</p>
+        <p>Тел: (+380)66-825-93-22</p>
+
+        <div class="scroll-to-top">
+            <a href="#" onclick="scrollToTop(); return false;">
+                &#8593; 
+            </a>
+        </div>
+    </section>
+
+    <div class="floating-circle">
+        <a href="@Url.Action("BokingPanel", "Bookings")" class="floating-circle-text">Реєстрація<br>Бронювання</a>
+    </div>
+
+
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) { 
+                document.querySelector('.scroll-to-top').style.display = 'block'; 
+            } else {
+                document.querySelector('.scroll-to-top').style.display = 'none'; 
+            }
+        });
+
+    </script>
+
+    <button onclick="goToAdminPanel()">Перейти до панелі адміністратора</button>
+
+    <script>
+        function goToAdminPanel() {
+            window.location.href = '/api/bookings/admin/panel';
+        }
+
+    </script>
+
+</body>
+</html>

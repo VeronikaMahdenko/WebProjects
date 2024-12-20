@@ -1,0 +1,10 @@
+﻿@* @model Web_site2.Models.Service
+
+<h1>@Model.Name</h1>
+
+<div>
+    <p>@Model.Description</p>
+    <img src="@Url.Content("~/" + Model.ImageUrl)" alt="@Model.Name" width="400" />
+</div>
+
+<a href="@Url.Action("Index", "Services")" class="btn btn-secondary">Повернутися до списку послуг</a> *@
