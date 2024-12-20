@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація</title>
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('{{ url_for("static", filename="exit.jpg") }}');
+            background-size: cover;
+            background-position: center;
+        }
+        .login-form {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .welcome-text {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .flash-message.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Реєстрація</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <label for="username">Ім'я користувача:</label>
+                <input type="text" name="username" id="username" required>
+                <br>
+                <label for="phone">Номер телефону:</label>
+                <input type="tel" name="phone" id="phone" required pattern="\+380\d{9}" title="Введіть номер у форматі +380XXXXXXXXX">
+                <br>
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" id="password" required>
+                <br>
+                <label for="confirm_password">Підтвердження паролю:</label>
+                <input type="password" name="confirm_password" id="confirm_password" required>
+                <br>
+                <button type="submit">Зареєструватися</button>
+            </form>
+            <p>Вже маєте акаунт? <a href="{{ url_for('login') }}">Увійти</a></p>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            let flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.style.display = 'none';
+            });
+        }, 5000);  // 5000 мс = 5 секунд
+    </script>
+</body>
+</html>

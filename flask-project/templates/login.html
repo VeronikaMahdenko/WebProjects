@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Вхід</title>
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('{{ url_for("static", filename="exit.jpg") }}');
+            background-size: cover;
+            background-position: center;
+        }
+        .login-form {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .welcome-text {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .instruction-text {
+            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+        .login-form h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        a:hover {
+            color: #45a049;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .alert.error {
+            background-color: #f44336;
+            color: white;
+        }
+        .alert.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Екскурсії Прикарпаття</h1>
+
+            <div class="welcome-text">
+                <p>Хочеш переглянути наші пропозиції і забронювати собі відпочинок?</p>
+                <p class="instruction-text">Увійди або ж зареєструйся, щоб побачити доступні екскурсії.</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == 'danger' %}
+                            <div class="alert error">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <label for="username">Ім'я користувача:</label>
+                <input type="text" name="username" id="username" required>
+                <br>
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" id="password" required>
+                <br>
+                <button type="submit">Увійти</button>
+            </form>
+
+            <a href="{{ url_for('register') }}">Реєстрація</a>
+        </div>
+    </div>
+</body>
+</html>
